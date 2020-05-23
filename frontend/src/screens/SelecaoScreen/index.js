@@ -1,92 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './styles.css';
 
 import Header from '../../components/Header';
 import EquipeCard from '../../components/EquipeCard';
 
+import api from '../../services/api';
+
 function SelecaoScreen() {
-  const equipes = [
-    {
-      id: 0,
-      nome: 'Nome Equipe',
-      sigla: 'SiglaEquipe',
-    },
-    {
-      id: 1,
-      nome: 'Nome Equipe',
-      sigla: 'SiglaEquipe',
-    },
-    {
-      id: 2,
-      nome: 'Nome Equipe',
-      sigla: 'SiglaEquipe',
-    },
-    {
-      id: 3,
-      nome: 'Nome Equipe',
-      sigla: 'SiglaEquipe',
-    },
-    {
-      id: 4,
-      nome: 'Nome Equipe',
-      sigla: 'SiglaEquipe',
-    },
-    {
-      id: 5,
-      nome: 'Nome Equipe',
-      sigla: 'SiglaEquipe',
-    },
-    {
-      id: 6,
-      nome: 'Nome Equipe',
-      sigla: 'SiglaEquipe',
-    },
-    {
-      id: 7,
-      nome: 'Nome Equipe',
-      sigla: 'SiglaEquipe',
-    },
-    {
-      id: 8,
-      nome: 'Nome Equipe',
-      sigla: 'SiglaEquipe',
-    },
-    {
-      id: 9,
-      nome: 'Nome Equipe',
-      sigla: 'SiglaEquipe',
-    },
-    {
-      id: 10,
-      nome: 'Nome Equipe',
-      sigla: 'SiglaEquipe',
-    },
-    {
-      id: 11,
-      nome: 'Nome Equipe',
-      sigla: 'SiglaEquipe',
-    },
-    {
-      id: 12,
-      nome: 'Nome Equipe',
-      sigla: 'SiglaEquipe',
-    },
-    {
-      id: 13,
-      nome: 'Nome Equipe',
-      sigla: 'SiglaEquipe',
-    },
-    {
-      id: 14,
-      nome: 'Nome Equipe',
-      sigla: 'SiglaEquipe',
-    },
-    {
-      id: 15,
-      nome: 'Nome Equipe',
-      sigla: 'SiglaEquipe',
-    },
-  ];
+  const [equipes, setEquipes] = useState([]);
+
+  useEffect(() => {
+    api.getEquipes()
+      .then(setEquipes);
+  }, []);
+
   return (
     <div className="selecao-container">
       <Header title="Fase de Seleção">
