@@ -1,0 +1,14 @@
+.equipe-card-container {
+  width: 100%;
+  min-height: 80px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  color: #444;
+}
+
+.equipe-card-container input[type=checkbox] {
+  width: 26px;
+  height: 26px;
+  margin: 16px;
+}

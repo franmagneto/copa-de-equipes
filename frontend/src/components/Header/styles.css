@@ -1,0 +1,25 @@
+.header-container {
+  text-align: center;
+  background: #777;
+  color: #ddd;
+  padding: 40px 0 16px;
+}
+
+.header-container h1 {
+  text-transform: uppercase;
+  font-size: 18px;
+}
+
+.header-container h2 {
+  font-size: 32px;
+  margin: 0;
+}
+
+.header-container h3 {
+  font-size: 16px;
+}
+
+.header-container hr {
+  border: 1px solid #ddd;
+  width: 128px;
+}

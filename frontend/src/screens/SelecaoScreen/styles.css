@@ -1,0 +1,20 @@
+.selecao-container .selecao-info {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.selecao-container h2 {
+  font-size: 22px;
+  margin: 0;
+}
+
+.selecao-container .selecionados {
+  font-size: 18px;
+}
+
+.selecao-container .selecao {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 13px 22px;
+}
