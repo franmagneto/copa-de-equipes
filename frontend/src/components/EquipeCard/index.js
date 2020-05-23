@@ -1,13 +1,17 @@
 import React from 'react';
 import './styles.css';
 
-function EquipeCard({ nome, sigla }) {
+function EquipeCard(props) {
   return (
     <div className="equipe-card-container">
-      <input type="checkbox" />
+      <input
+        type="checkbox"
+        checked={props.checked}
+        onChange={props.onChange}
+      />
       <ul>
-        <li>{nome}</li>
-        <li>{sigla}</li>
+        <li>{props.nome}</li>
+        <li>{props.sigla}</li>
       </ul>
     </div>
   );
