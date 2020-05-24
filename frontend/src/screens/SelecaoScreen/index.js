@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import './styles.css';
 
 import Header from '../../components/Header';
@@ -9,6 +10,7 @@ import api from '../../services/api';
 function SelecaoScreen() {
   const [equipes, setEquipes] = useState([]);
   const [selecionadas, setSelecionadas] = useState(0);
+  const [resultado, setResultado] = useState([]);
 
   useEffect(() => {
     api.getEquipes()
@@ -27,7 +29,25 @@ function SelecaoScreen() {
     };
   }
 
-  return (
+  async function gerarCopa() {
+    if (selecionadas !== 8) {
+      return alert('Selecione 8 equipes!');
+    }
+
+    const selecao = equipes
+      .filter(equipe => equipe.checked)
+      .map(equipe => equipe.id);
+
+    const resultado = await api.postSelecao(selecao);
+    setResultado(resultado)
+  }
+
+  return (resultado.length > 0) ? (
+    <Redirect
+      push
+      to={{ pathname: '/resultado', state: { resultado } }}
+    />
+  ) : (
     <div className="selecao-container">
       <Header title="Fase de Seleção">
         Selecione 8 equipes que você deseja para a competição e depois
@@ -40,7 +60,7 @@ function SelecaoScreen() {
             {selecionadas} de 8 equipes
           </span>
         </div>
-        <button>Gerar Copa</button>
+        <button onClick={gerarCopa}>Gerar Copa</button>
       </div>
       <div className="selecao">
         {equipes.map((equipe, index) => (
