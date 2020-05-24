@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 @RestController
@@ -18,5 +19,11 @@ public class EquipeController {
     @GetMapping
     public List<Equipe> getEquipes() throws ExecutionException, InterruptedException {
         return equipeService.getEquipes();
+    }
+
+    @PostMapping
+    @RequestMapping("/selecao")
+    public List<Equipe> postSelecao(@RequestBody List<UUID> selecaoIds) {
+        return equipeService.getResultado(selecaoIds);
     }
 }

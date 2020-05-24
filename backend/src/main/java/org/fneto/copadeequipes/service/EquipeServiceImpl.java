@@ -6,9 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+import java.util.function.Function;
 
 @Service
 public class EquipeServiceImpl implements EquipeService {
@@ -16,14 +17,23 @@ public class EquipeServiceImpl implements EquipeService {
     @Autowired
     EquipeClient equipeClient;
 
-    private List<Equipe> equipes = null;
+    private Map<UUID, Equipe> equipes;
 
     @Override
     public List<Equipe> getEquipes() throws ExecutionException, InterruptedException {
         if (equipes == null) {
             fetchEquipes();
         }
-        return equipes;
+        return new ArrayList<>(equipes.values());
+    }
+
+    @Override
+    public List<Equipe> getResultado(List<UUID> selecaoIds) {
+        Deque<Equipe> rodada = montaSelecao(selecaoIds);
+        while (rodada.size() > 2) {
+            rodada = calculaRodada(rodada);
+        }
+        return new ArrayList<>(rodada);
     }
 
     private void fetchEquipes() throws ExecutionException, InterruptedException {
@@ -32,11 +42,33 @@ public class EquipeServiceImpl implements EquipeService {
                 .uri("/equipes.json")
                 .retrieve();
 
-        Future<List<Equipe>> equipesFuture = response
+        Future<Map<UUID, Equipe>> equipesFuture = response
                 .bodyToFlux(Equipe.class)
-                .collectList()
+                .collectMap(Equipe::getId, Function.identity(), LinkedHashMap::new)
                 .toFuture();
 
         equipes = equipesFuture.get();
+    }
+
+    private Deque<Equipe> montaSelecao(List<UUID> ids) {
+        Deque<Equipe> selecao = new ArrayDeque<>();
+        for (UUID id: ids) {
+            selecao.add(equipes.get(id));
+        }
+        return selecao;
+    }
+
+    private Deque<Equipe> calculaRodada(Deque<Equipe> selecao) {
+        Deque<Equipe> proximaRodada = new ArrayDeque<>();
+        while (!selecao.isEmpty()) {
+            List<Equipe> chave = Arrays.asList(selecao.removeFirst(), selecao.removeLast());
+            proximaRodada.add(vencedorChave(chave));
+        }
+        return proximaRodada;
+    }
+
+    private Equipe vencedorChave(List<Equipe> chave) {
+        chave.sort(Equipe::comparador);
+        return chave.get(0);
     }
 }
