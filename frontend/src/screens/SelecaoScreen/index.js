@@ -30,10 +30,6 @@ function SelecaoScreen() {
   }
 
   async function gerarCopa() {
-    if (selecionadas !== 8) {
-      return alert('Selecione 8 equipes!');
-    }
-
     const selecao = equipes
       .filter(equipe => equipe.checked)
       .map(equipe => equipe.id);
@@ -60,7 +56,9 @@ function SelecaoScreen() {
             {selecionadas} de 8 equipes
           </span>
         </div>
-        <button onClick={gerarCopa}>Gerar Copa</button>
+        <button disabled={selecionadas !== 8} onClick={gerarCopa}>
+          Gerar Copa
+        </button>
       </div>
       <div className="selecao">
         {equipes.map((equipe, index) => (

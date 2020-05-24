@@ -24,12 +24,17 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+button:hover:enabled {
   filter: brightness(120%);
 }
 
-button:active {
+button:active:enabled {
   translate: 2px 2px;
+}
+
+button:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
 }
 
 ul {
