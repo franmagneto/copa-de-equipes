@@ -33,7 +33,9 @@ public class EquipeServiceImpl implements EquipeService {
         while (rodada.size() > 2) {
             rodada = calculaRodada(rodada);
         }
-        return new ArrayList<>(rodada);
+        List<Equipe> resultado = new ArrayList<>(rodada);
+        resultado.sort(Equipe::compareTo);
+        return resultado;
     }
 
     private void fetchEquipes() throws ExecutionException, InterruptedException {
@@ -68,7 +70,7 @@ public class EquipeServiceImpl implements EquipeService {
     }
 
     private Equipe vencedorChave(List<Equipe> chave) {
-        chave.sort(Equipe::comparador);
+        chave.sort(Equipe::compareTo);
         return chave.get(0);
     }
 }
