@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class ComparadorAlfanumericoTest {
 
     @Test
-    void ordenaCorretamente() {
+    void ordenaCorretamenteTest() {
         List<String> lista = Arrays.asList(
                 "Bla 4",
                 "Bla bla",

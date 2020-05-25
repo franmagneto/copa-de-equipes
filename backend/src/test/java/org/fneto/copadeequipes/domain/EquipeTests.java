@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class EquipeTests {
 
     @Test
-    void serializacao() throws JsonProcessingException {
+    void serializacaoTest() throws JsonProcessingException {
         Equipe equipe = new Equipe(new UUID(1, 2), "Equipe 1", "EQP1", 1);
         ObjectMapper om = new ObjectMapper();
         String equipeJson = om.writeValueAsString(equipe);
