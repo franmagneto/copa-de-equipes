@@ -19,17 +19,19 @@ public class ComparadorAlfanumericoTest {
                 "Bla bla",
                 "Bla 3",
                 "Bla bla1",
+                "Ble",
                 "Bla 12"
         );
 
         lista.sort(new ComparadorAlfanumerico());
 
         assertNotNull(lista);
-        assertEquals(lista.get(0), "Bla 3");
-        assertEquals(lista.get(1), "Bla 4");
-        assertEquals(lista.get(2), "Bla 12");
-        assertEquals(lista.get(3), "Bla bla");
-        assertEquals(lista.get(4), "Bla bla1");
+        assertEquals("Bla 3", lista.get(0));
+        assertEquals("Bla 4", lista.get(1));
+        assertEquals("Bla 12", lista.get(2));
+        assertEquals("Bla bla", lista.get(3));
+        assertEquals("Bla bla1", lista.get(4));
+        assertEquals("Ble", lista.get(5));
 
     }
 }
