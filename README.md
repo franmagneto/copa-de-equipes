@@ -13,7 +13,7 @@ Alternativamente, pode-se fornecer outro endereço de api pela propriedade `api.
 ### Executar backend:
 
     cd backend
-    ./mvnw spring-boot:run
+    mvn spring-boot:run
 
 ### Executar frontend:
 
