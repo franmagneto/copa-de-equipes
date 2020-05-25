@@ -19,7 +19,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.Mockito.when;
 
 @WebFluxTest(EquipeController.class)
-public class EquipeControllerTest {
+public class EquipeControllerTests {
 
     @Autowired
     private WebTestClient webTestClient;

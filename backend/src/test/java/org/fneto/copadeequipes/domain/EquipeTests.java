@@ -17,6 +17,7 @@ public class EquipeTests {
         Equipe equipe = new Equipe(new UUID(1, 2), "Equipe 1", "EQP1", 1);
         ObjectMapper om = new ObjectMapper();
         String equipeJson = om.writeValueAsString(equipe);
+        // TODO: Usar jsonpath
         assertEquals(equipeJson, "{\"id\":\"00000000-0000-0001-0000-000000000002\",\"nome\":\"Equipe 1\",\"sigla\":\"EQP1\",\"gols\":1}");
     }
 }
